@@ -443,9 +443,11 @@ namespace Hotel.Forms
                         }
                         if (trackBar_Comparison.Value == 0)
                         {
-                            ServicesTableUpdate(hotel.Services.ToList().FindAll(p => MyMethods.ServicePriceForSpecificTime(p, DateTime.Now) <= costPerUnit)); break;
+                            ServicesTableUpdate(hotel.Services.ToList()
+                                .FindAll(p => p.AccessLevel < 4 && MyMethods.ServicePriceForSpecificTime(p, DateTime.Now) <= costPerUnit)); break;
                         }
-                        ServicesTableUpdate(hotel.Services.ToList().FindAll(p => MyMethods.ServicePriceForSpecificTime(p, DateTime.Now) >= costPerUnit)); break;
+                        ServicesTableUpdate(hotel.Services.ToList()
+                            .FindAll(p => p.AccessLevel < 4 && MyMethods.ServicePriceForSpecificTime(p, DateTime.Now) >= costPerUnit)); break;
                     case "Уровень доступа":
                         int accessLevel;
                         switch (info)
